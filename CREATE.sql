@@ -1,39 +1,48 @@
 create database Proj;
 
-create table judoca(
-	j_id int not null AUTO_INCREMENT,
-	j_name VARCHAR(255) not null,
-	j_regCbj VARCHAR(255) not null,
-	j_tel1 VARCHAR(255) not null,
-	j_tel2 VARCHAR(255) not null,
-	j_email VARCHAR(255) not null,
-	j_cpf VARCHAR(11) not null,
-	j_observ VARCHAR(255),
-	j_rg VARCHAR(9) not null,
-	j_dtnasc timestamp not null,
-	primary key(j_id)
+create table Aluno(
+	a_id int not null auto_increment,
+	a_nome varchar(255) not null,
+	a_regCbj varchar(255) not null,
+	a_tel1 varchar(255) not null,
+	a_tel2 varchar(255) not null,
+	a_email varchar(255) not null,
+	a_cpf varchar(11) not null,
+	a_obs varchar(255),
+	primary key (a_id),
+	foreign key(pID) references Professor(p_id),
+	foreign key(ent_cnpj) references Entidade(e_cnpj)
+	foreign key(a_addr) references Endereco(end_id)
+	
 );
-
-create table professor(
-	p_id int not null AUTO_INCREMENT,
+create table Professor(
+	p_id int not null auto_increment,
 	p_nome varchar(255) not null,
-	p_regCbj VARCHAR(255) not null,
-	p_tel1 VARCHAR(255) not null,
-	p_tel2 VARCHAR(255) not null,
-	p_email VARCHAR(255) not null,
-	p_cpf VARCHAR(11) not null,
-	p_observ VARCHAR(255),
-	p_rg VARCHAR(9) not null,
-	p_dtnasc timestamp not null,
-	primary key (p_id)
+	p_regCbj varchar(255) not null,
+	p_tel1 varchar(255) not null,
+	p_tel2 varchar(255) not null,
+	p_email varchar(255) not null,
+	p_cpf varchar(11) not null,
+	p_obs varchar(255),
+	primary key (p_id
+	foreign key(p_addr) references Endereco(end_id)
 );
 
-create table escolas(
-	e_id int not null AUTO_INCREMENT,
+create table Endereco(
+	end_idid int not null auto_increment,
+	end_rua varchar(255),
+	end_bairro varchar(255),
+	end_cidade varchar(255),
+	end_estado varchar(255),
+	end_cep varchar(8) not null,
+	primary key (end_id)
+);
+
+create table Entidade(
 	e_nome varchar(255) not null,
 	e_cnpj varchar(14) not null,
 	e_tel1 varchar(255) not null,
 	e_tel2 varchar(255) not null,
-	e_addr varchar(255) not null,
-	primary key (e_id)
+	primary key (e_cnpj),
+	foreign key(e_addr) references Endereco(end_id)
 );
